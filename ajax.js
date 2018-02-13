@@ -13,15 +13,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
   pingPongButtonEl.addEventListener('click', function(){
     $.ajax({
-      url: "http://first-ajax-api.herokuapp.com/pong",
+      url: "http://first-ajax-api.herokuapp.com/ping",
       method: "get",
       dataType: "text"
     }).done(function(responseData){
       console.log(responseData);
-    }).fail(function(){
+    }).fail(function(request){
+      console.log(request.responseText);
       var failMsgEl = document.createElement('p');
       failMsgEl.innerHTML = "Sorry, I have failed.  I will try harder next time."
       document.querySelector('#step3456').appendChild(failMsgEl);
+    }).always(function(){
+      console.log('Hey the request finished!');
     });
   });
 
