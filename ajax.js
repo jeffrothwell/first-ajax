@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  rootButtonEl = document.querySelector('button[name="root-button"]')
-  pingPongButtonEl = document.querySelector('button[name="ping-pong-button"]')
+  var rootButtonEl = document.querySelector('button[name="root-button"]')
+  var pingPongButtonEl = document.querySelector('button[name="ping-pong-button"]')
+  var countButtonEl = document.querySelector('button[name="count-button"]')
 
   rootButtonEl.addEventListener('click', function(){
     $.ajax({
@@ -28,5 +29,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  countButtonEl.addEventListener('click', function(){
+    $.ajax({
+      url: "http://first-ajax-api.herokuapp.com/count",
+      method: "get",
+      dataType: "text"
+    }).done(function(responseData){
+      var countMsgEl = document.createElement('p');
+      countMsgEl.innerHTML = responseData;
+      document.querySelector('#step7').appendChild(countMsgEl);
+    })
+  });
 
 });
